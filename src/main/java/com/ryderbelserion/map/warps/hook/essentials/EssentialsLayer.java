@@ -21,43 +21,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package net.pl3x.map.warps;
+package com.ryderbelserion.map.warps.hook.essentials;
 
-import java.util.Arrays;
-import net.pl3x.map.warps.hook.Hook;
-import net.pl3x.map.warps.listener.Pl3xMapListener;
-import org.bukkit.plugin.java.JavaPlugin;
+import java.util.Collection;
+import net.pl3x.map.core.markers.layer.WorldLayer;
+import net.pl3x.map.core.markers.marker.Marker;
+import net.pl3x.map.core.world.World;
+import org.jetbrains.annotations.NotNull;
 
-public final class Pl3xMapWarps extends JavaPlugin {
-    @Override
-    public void onEnable() {
-        if (!getServer().getPluginManager().isPluginEnabled("Pl3xMap")) {
-            getLogger().severe("Pl3xMap not found!");
-            getServer().getPluginManager().disablePlugin(this);
-            return;
-        }
+public class EssentialsLayer extends WorldLayer {
+    public static final String KEY = "essentials_warps";
 
-        findHooks();
+    private final EssentialsHook essentialsHook;
 
-        getServer().getPluginManager().registerEvents(new Pl3xMapListener(this), this);
+    public EssentialsLayer(@NotNull EssentialsHook essentialsHook, @NotNull World world) {
+        super(KEY, world, () -> EssentialsConfig.LAYER_LABEL);
+        this.essentialsHook = essentialsHook;
+
+        setShowControls(EssentialsConfig.LAYER_SHOW_CONTROLS);
+        setDefaultHidden(EssentialsConfig.LAYER_DEFAULT_HIDDEN);
+        setUpdateInterval(EssentialsConfig.LAYER_UPDATE_INTERVAL);
+        setPriority(EssentialsConfig.LAYER_PRIORITY);
+        setZIndex(EssentialsConfig.LAYER_ZINDEX);
     }
 
     @Override
-    public void onDisable() {
-        Hook.clear();
-    }
-
-    public void reload() {
-        Hook.clear();
-        findHooks();
-    }
-
-    public void findHooks() {
-        Arrays.stream(Hook.Impl.values()).forEach(impl -> {
-            if (getServer().getPluginManager().isPluginEnabled(impl.getPluginName())) {
-                getLogger().info("Hooking into " + impl.getPluginName());
-                Hook.add(impl);
-            }
-        });
+    public @NotNull Collection<Marker<?>> getMarkers() {
+        return this.essentialsHook.getWarps(getWorld());
     }
 }

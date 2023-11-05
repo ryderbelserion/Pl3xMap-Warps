@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package net.pl3x.map.warps.configuration;
+package com.ryderbelserion.map.warps.configuration;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,18 +35,21 @@ import net.pl3x.map.core.image.IconImage;
 import net.pl3x.map.core.markers.Point;
 import net.pl3x.map.core.markers.Vector;
 import net.pl3x.map.core.markers.option.Tooltip;
-import net.pl3x.map.warps.Pl3xMapWarps;
+import com.ryderbelserion.map.warps.Pl3xMapWarps;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class Config extends AbstractConfig {
+
     public static void registerIcon(String image) {
         Pl3xMapWarps plugin = Pl3xMapWarps.getPlugin(Pl3xMapWarps.class);
         String filename = String.format("icons%s%s.png", File.separator, image);
         File file = new File(plugin.getDataFolder(), filename);
+
         if (!file.exists()) {
             plugin.saveResource(filename, false);
         }
+
         try {
             String key = String.format("pl3xmap_warps_%s", image);
             Pl3xMap.api().getIconRegistry().register(new IconImage(key, ImageIO.read(file), "png"));
@@ -59,9 +62,11 @@ public abstract class Config extends AbstractConfig {
     @Override
     protected @Nullable Object get(@NotNull String path) {
         Object value = getConfig().get(path);
+
         if (value == null) {
             return null;
         }
+
         //noinspection EnhancedSwitchMigration
         switch (path) {
             case "marker.icon.size":
@@ -88,10 +93,12 @@ public abstract class Config extends AbstractConfig {
                     Map<String, Integer> point = (Map<String, Integer>) value;
                     return Point.of(point.get("x"), point.get("z"));
                 }
+
                 break;
             case "marker.tooltip.direction":
                 return Tooltip.Direction.valueOf(String.valueOf(value).toUpperCase(Locale.ROOT));
         }
+
         return super.get(path);
     }
 
@@ -104,6 +111,7 @@ public abstract class Config extends AbstractConfig {
         } else if (value instanceof Tooltip.Direction direction) {
             value = direction.name();
         }
+
         super.set(path, value);
     }
 }

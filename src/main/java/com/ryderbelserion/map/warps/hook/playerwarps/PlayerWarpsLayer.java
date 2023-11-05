@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package net.pl3x.map.warps.hook.essentials;
+package com.ryderbelserion.map.warps.hook.playerwarps;
 
 import java.util.Collection;
 import net.pl3x.map.core.markers.layer.WorldLayer;
@@ -29,24 +29,25 @@ import net.pl3x.map.core.markers.marker.Marker;
 import net.pl3x.map.core.world.World;
 import org.jetbrains.annotations.NotNull;
 
-public class EssentialsLayer extends WorldLayer {
-    public static final String KEY = "essentials_warps";
+public class PlayerWarpsLayer extends WorldLayer {
+    public static final String KEY = "playerwarps_warps";
 
-    private final EssentialsHook essentialsHook;
+    private final PlayerWarpsHook playerWarpsHook;
 
-    public EssentialsLayer(@NotNull EssentialsHook essentialsHook, @NotNull World world) {
-        super(KEY, world, () -> EssentialsConfig.LAYER_LABEL);
-        this.essentialsHook = essentialsHook;
+    public PlayerWarpsLayer(@NotNull PlayerWarpsHook playerWarpsHook, @NotNull World world) {
+        super(KEY, world, () -> PlayerWarpsConfig.LAYER_LABEL);
+        this.playerWarpsHook = playerWarpsHook;
 
-        setShowControls(EssentialsConfig.LAYER_SHOW_CONTROLS);
-        setDefaultHidden(EssentialsConfig.LAYER_DEFAULT_HIDDEN);
-        setUpdateInterval(EssentialsConfig.LAYER_UPDATE_INTERVAL);
-        setPriority(EssentialsConfig.LAYER_PRIORITY);
-        setZIndex(EssentialsConfig.LAYER_ZINDEX);
+        setShowControls(PlayerWarpsConfig.LAYER_SHOW_CONTROLS);
+        setDefaultHidden(PlayerWarpsConfig.LAYER_DEFAULT_HIDDEN);
+        setUpdateInterval(PlayerWarpsConfig.LAYER_UPDATE_INTERVAL);
+        setPriority(PlayerWarpsConfig.LAYER_PRIORITY);
+        setZIndex(PlayerWarpsConfig.LAYER_ZINDEX);
+        setCss(PlayerWarpsConfig.LAYER_CSS);
     }
 
     @Override
     public @NotNull Collection<Marker<?>> getMarkers() {
-        return this.essentialsHook.getWarps(getWorld());
+        return this.playerWarpsHook.getWarps(getWorld());
     }
 }

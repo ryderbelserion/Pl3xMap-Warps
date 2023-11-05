@@ -21,8 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package net.pl3x.map.warps.listener;
+package com.ryderbelserion.map.warps.listener;
 
+import com.ryderbelserion.map.warps.Pl3xMapWarps;
+import com.ryderbelserion.map.warps.hook.Hook;
 import net.pl3x.map.core.Pl3xMap;
 import net.pl3x.map.core.event.EventHandler;
 import net.pl3x.map.core.event.EventListener;
@@ -31,8 +33,6 @@ import net.pl3x.map.core.event.server.ServerLoadedEvent;
 import net.pl3x.map.core.event.world.WorldLoadedEvent;
 import net.pl3x.map.core.event.world.WorldUnloadedEvent;
 import net.pl3x.map.core.world.World;
-import net.pl3x.map.warps.Pl3xMapWarps;
-import net.pl3x.map.warps.hook.Hook;
 import org.bukkit.event.Listener;
 import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.event.server.PluginEnableEvent;
@@ -76,8 +76,7 @@ public class Pl3xMapListener implements EventListener, Listener {
     public void onWorldUnloaded(@NotNull WorldUnloadedEvent event) {
         try {
             Hook.hooks().forEach(hook -> hook.unloadWorld(event.getWorld()));
-        } catch (Throwable ignore) {
-        }
+        } catch (Throwable ignore) {}
     }
 
     private void registerWorld(@NotNull World world) {

@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package net.pl3x.map.warps.hook.essentials;
+package com.ryderbelserion.map.warps.hook.essentials;
 
 import com.earth2me.essentials.Essentials;
 import com.earth2me.essentials.Warps;
@@ -36,12 +36,13 @@ import net.pl3x.map.core.markers.marker.Icon;
 import net.pl3x.map.core.markers.marker.Marker;
 import net.pl3x.map.core.markers.option.Options;
 import net.pl3x.map.core.world.World;
-import net.pl3x.map.warps.hook.Hook;
+import com.ryderbelserion.map.warps.hook.Hook;
 import org.bukkit.Location;
 import org.bukkit.event.Listener;
 import org.jetbrains.annotations.NotNull;
 
 public class EssentialsHook implements Listener, Hook {
+
     private final String imageKey;
     private final String shadowKey;
     private final Options options;

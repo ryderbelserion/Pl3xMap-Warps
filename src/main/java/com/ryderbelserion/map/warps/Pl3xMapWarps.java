@@ -21,33 +21,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package net.pl3x.map.warps.hook.playerwarps;
+package com.ryderbelserion.map.warps;
 
-import java.util.Collection;
-import net.pl3x.map.core.markers.layer.WorldLayer;
-import net.pl3x.map.core.markers.marker.Marker;
-import net.pl3x.map.core.world.World;
-import org.jetbrains.annotations.NotNull;
+import java.util.Arrays;
+import com.ryderbelserion.map.warps.hook.Hook;
+import com.ryderbelserion.map.warps.listener.Pl3xMapListener;
+import org.bukkit.plugin.java.JavaPlugin;
 
-public class PlayerWarpsLayer extends WorldLayer {
-    public static final String KEY = "playerwarps_warps";
+public final class Pl3xMapWarps extends JavaPlugin {
 
-    private final PlayerWarpsHook playerWarpsHook;
+    @Override
+    public void onEnable() {
+        if (!getServer().getPluginManager().isPluginEnabled("Pl3xMap")) {
+            getLogger().severe("Pl3xMap not found!");
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
 
-    public PlayerWarpsLayer(@NotNull PlayerWarpsHook playerWarpsHook, @NotNull World world) {
-        super(KEY, world, () -> PlayerWarpsConfig.LAYER_LABEL);
-        this.playerWarpsHook = playerWarpsHook;
+        findHooks();
 
-        setShowControls(PlayerWarpsConfig.LAYER_SHOW_CONTROLS);
-        setDefaultHidden(PlayerWarpsConfig.LAYER_DEFAULT_HIDDEN);
-        setUpdateInterval(PlayerWarpsConfig.LAYER_UPDATE_INTERVAL);
-        setPriority(PlayerWarpsConfig.LAYER_PRIORITY);
-        setZIndex(PlayerWarpsConfig.LAYER_ZINDEX);
-        setCss(PlayerWarpsConfig.LAYER_CSS);
+        getServer().getPluginManager().registerEvents(new Pl3xMapListener(this), this);
     }
 
     @Override
-    public @NotNull Collection<Marker<?>> getMarkers() {
-        return this.playerWarpsHook.getWarps(getWorld());
+    public void onDisable() {
+        Hook.clear();
+    }
+
+    public void reload() {
+        Hook.clear();
+        findHooks();
+    }
+
+    public void findHooks() {
+        Arrays.stream(Hook.Impl.values()).forEach(impl -> {
+            if (getServer().getPluginManager().isPluginEnabled(impl.getPluginName())) {
+                getLogger().info("Hooking into " + impl.getPluginName());
+                Hook.add(impl);
+            }
+        });
     }
 }

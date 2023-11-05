@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package net.pl3x.map.warps.hook.playerwarps;
+package com.ryderbelserion.map.warps.hook.playerwarps;
 
 import com.olziedev.playerwarps.api.PlayerWarpsAPI;
 import com.olziedev.playerwarps.api.warp.WCategory;
@@ -35,10 +35,11 @@ import net.pl3x.map.core.markers.marker.Icon;
 import net.pl3x.map.core.markers.marker.Marker;
 import net.pl3x.map.core.markers.option.Options;
 import net.pl3x.map.core.world.World;
-import net.pl3x.map.warps.hook.Hook;
+import com.ryderbelserion.map.warps.hook.Hook;
 import org.jetbrains.annotations.NotNull;
 
 public class PlayerWarpsHook implements Hook {
+
     private final String imageKey;
     private final String shadowKey;
     private final Options options;

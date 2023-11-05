@@ -21,21 +21,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package net.pl3x.map.warps.hook;
+package com.ryderbelserion.map.warps.hook;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
-import net.pl3x.map.warps.hook.essentials.EssentialsHook;
-import net.pl3x.map.warps.hook.playerwarps.PlayerWarpsHook;
+import com.ryderbelserion.map.warps.hook.essentials.EssentialsHook;
+import com.ryderbelserion.map.warps.hook.playerwarps.PlayerWarpsHook;
 import net.pl3x.map.core.markers.marker.Marker;
 import net.pl3x.map.core.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public interface Hook {
+
     Collection<Marker<?>> EMPTY_LIST = new ArrayList<>();
     Map<String, Hook> HOOKS = new HashMap<>();
 

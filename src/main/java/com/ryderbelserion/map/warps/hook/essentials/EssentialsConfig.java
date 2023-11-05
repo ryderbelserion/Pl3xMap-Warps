@@ -21,14 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package net.pl3x.map.warps.hook.essentials;
+package com.ryderbelserion.map.warps.hook.essentials;
 
 import java.nio.file.Path;
 import net.pl3x.map.core.markers.Point;
 import net.pl3x.map.core.markers.Vector;
 import net.pl3x.map.core.markers.option.Tooltip;
-import net.pl3x.map.warps.Pl3xMapWarps;
-import net.pl3x.map.warps.configuration.Config;
+import com.ryderbelserion.map.warps.Pl3xMapWarps;
+import com.ryderbelserion.map.warps.configuration.Config;
 
 @SuppressWarnings("CanBeFinal")
 public final class EssentialsConfig extends Config {
