@@ -1,5 +1,5 @@
 plugins {
-    id("io.papermc.paperweight.userdev") version "1.5.7"
+    id("io.papermc.paperweight.userdev") version "1.5.9"
 
     `java-library`
 }
@@ -19,12 +19,16 @@ repositories {
     }
 }
 
+rootProject.version = if (System.getenv("BUILD_NUMBER") != null) "${rootProject.version}-${System.getenv("BUILD_NUMBER")}" else rootProject.version
+
+val mcVersion = providers.gradleProperty("mcVersion").get()
+
 dependencies {
-    paperweight.paperDevBundle("1.20.2-R0.1-SNAPSHOT")
+    paperweight.paperDevBundle("$mcVersion-R0.1-SNAPSHOT")
 
-    compileOnly("maven.modrinth", "pl3xmap", "1.20.2-474")
+    compileOnly("maven.modrinth", "pl3xmap", providers.gradleProperty("pl3xmapVersion").get())
 
-    compileOnly("net.essentialsx", "EssentialsX", "2.19.0")
+    compileOnly("net.essentialsx", "EssentialsX", "2.20.1")
 
     compileOnly("com.olziedev", "playerwarps-api", "6.24.0-pre30")
 }
