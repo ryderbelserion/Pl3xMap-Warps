@@ -13,7 +13,7 @@
 Don't see your warp plugin listed here? Let me know on Discord, and I'll see about adding it.
 
 ## Downloads
-https://ci.crazycrew.us/view/ryderbelserion/job/Pl3xMap-Warps/
+https://jenkins.crazycrew.us/view/other/job/Pl3xMap-Warps/
 
 ## Installation
 1) Place the jar inside your server's `plugins` folder
