@@ -6,7 +6,6 @@
 </div>
 
 ## Supported warps plugins
-
 * [EssentialsX](https://essentialsx.net/)
 * [PlayerWarps](https://www.spigotmc.org/resources/.66692//)
 
@@ -14,6 +13,9 @@ Don't see your warp plugin listed here? Let me know on Discord, and I'll see abo
 
 ## Downloads
 https://jenkins.crazycrew.us/view/other/job/Pl3xMap-Warps/
+
+## Support
+https://discord.gg/badbones-s-live-chat-182615261403283459
 
 ## Installation
 1) Place the jar inside your server's `plugins` folder
